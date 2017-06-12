@@ -15,16 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Strings for component 'cypherlab_online', language 'en', branch 'master'
  *
- * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    cypherlab_online
+ * @copyright  2011 onwards Eloy Lafuente (stronk7) {@link http://stronk7.com}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+$string['event_assessable_uploaded'] = 'An online text has been uploaded.';
+$string['pluginname'] = 'Online';

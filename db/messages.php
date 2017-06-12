@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,16 +16,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Defines message providers (types of messages being sent)
  *
  * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 2010 onwards  Aparup Banerjee  http://moodle.com
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+$messageproviders = array (
 
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+/// Ordinary single forum posts
+    'cypherlab_updates' => array (
+    )
+
+);

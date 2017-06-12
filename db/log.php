@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,16 +16,20 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Definition of log events
  *
- * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package    mod_cypherlab
+ * @category   log
+ * @copyright  2010 Petr Skoda (http://skodak.org)
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+$logs = array(
+    array('module'=>'cypherlab', 'action'=>'view', 'mtable'=>'cypherlab', 'field'=>'name'),
+    array('module'=>'cypherlab', 'action'=>'add', 'mtable'=>'cypherlab', 'field'=>'name'),
+    array('module'=>'cypherlab', 'action'=>'update', 'mtable'=>'cypherlab', 'field'=>'name'),
+    array('module'=>'cypherlab', 'action'=>'view submission', 'mtable'=>'cypherlab', 'field'=>'name'),
+    array('module'=>'cypherlab', 'action'=>'upload', 'mtable'=>'cypherlab', 'field'=>'name'),
+);

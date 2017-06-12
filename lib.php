@@ -13,26 +13,81 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
-/**
- * This page contains navigation hooks for the developer course plugin.
- *
- * @package    tool_devcourse
- * @copyright  2016 Adrian Greeve
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- */
-
-defined('MOODLE_INTERNAL') || die();
 
 /**
- * This function extends the navigation menu and adds a node in the course administration section.
+ * cypherlab_base is the base class for cypherlab types
  *
- * @param  navigation_node $navigation Navigation node to extend.
- * @param  stdClass $course Course object
- * @param  context_course $coursecontext Course context
- * @return void.
+ * This class provides all the functionality for an cypherlab
+ *
+ * @package   mod_cypherlab
+ * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-function tool_devcourse_extend_navigation_course($navigation, $course, $coursecontext) {
-    $url = new moodle_url('/admin/tool/devcourse/index.php');
-    $devcoursenode = navigation_node::create('Development course', $url, navigation_node::TYPE_CUSTOM, 'Dev course', 'devcourse');
-    $navigation->add_node($devcoursenode);
+
+/**
+ * Adds an cypherlab instance
+ *
+ * Only used by generators so we can create old cypherlabs to test the upgrade.
+ *
+ * @param stdClass $cypherlab
+ * @param mod_cypherlab_mod_form $mform
+ * @return int intance id
+ */
+function cypherlab_add_instance($cypherlab, $mform = null) {
+    global $DB;
+
+    $cypherlab->timemodified = time();
+    $cypherlab->courseid = $cypherlab->course;
+    $returnid = $DB->insert_record("cypherlab", $cypherlab);
+    $cypherlab->id = $returnid;
+    return $returnid;
+}
+
+/**
+ * Deletes an cypherlab instance
+ *
+ * @param $id
+ */
+function cypherlab_delete_instance($id){
+    global $CFG, $DB;
+
+    if (! $cypherlab = $DB->get_record('cypherlab', array('id'=>$id))) {
+        return false;
+    }
+
+    $result = true;
+    // Now get rid of all files
+    $fs = get_file_storage();
+    if ($cm = get_coursemodule_from_instance('cypherlab', $cypherlab->id)) {
+        $context = context_module::instance($cm->id);
+        $fs->delete_area_files($context->id);
+    }
+
+    if (! $DB->delete_records('cypherlab_submissions', array('cypherlab'=>$cypherlab->id))) {
+        $result = false;
+    }
+
+    if (! $DB->delete_records('event', array('modulename'=>'cypherlab', 'instance'=>$cypherlab->id))) {
+        $result = false;
+    }
+
+    if (! $DB->delete_records('cypherlab', array('id'=>$cypherlab->id))) {
+        $result = false;
+    }
+
+    grade_update('mod/cypherlab', $cypherlab->course, 'mod', 'cypherlab', $cypherlab->id, 0, NULL, array('deleted'=>1));
+
+    return $result;
+}
+
+/**
+ * @param string $feature FEATURE_xx constant for requested feature
+ * @return mixed True if module supports feature, null if doesn't know
+ */
+function cypherlab_supports($feature) {
+    switch($feature) {
+        case FEATURE_BACKUP_MOODLE2:          return true;
+
+        default: return null;
+    }
 }

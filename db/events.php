@@ -15,16 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Definition of cypherlab event handlers
  *
- * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_cypherlab
+ * @category event
+ * @copyright 1999 onwards Martin Dougiamas  http://dougiamas.com
+ * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+$handlers = array();
 
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+/* List of events thrown from cypherlab module
+
+cypherlab_finalize_sent - object course, object user, object cm, object cypherlab, fileareaname
+cypherlab_file_sent     - object course, object user, object cm, object cypherlab, object file
+
+*/

@@ -15,43 +15,40 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Renderer class for developer course
+ * mod_cypherlab data generator
  *
- * @package    tool_devcourse
- * @copyright  2016 Adrian Greeve <adriangreeve.com>
+ * @package    mod_cypherlab
+ * @category   test
+ * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
-namespace tool_devcourse\output;
 
 defined('MOODLE_INTERNAL') || die();
 
-use plugin_renderer_base;
-use renderable;
 
 /**
- * Renderer class for developer course
+ * cypherlab module data generator class
  *
- * @package    tool_devcourse
- * @copyright  2016 Adrian Greeve <adriangreeve.com>
+ * @package    mod_cypherlab
+ * @category   test
+ * @copyright  2012 Petr Skoda {@link http://skodak.org}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class renderer extends plugin_renderer_base {
+class mod_cypherlab_generator extends testing_module_generator {
 
-     /**
-     * Defer to template.
-     *
-     * @param developer_course_main_page $page
-     *
-     * @return string html for the page
-     */
-    public function render_developer_course_main_page(developer_course_main_page $page) {
-        $data = $page->export_for_template($this);
-        return parent::render_from_template('tool_devcourse/developer_course_main_page', $data);
+    public function create_instance($record = null, array $options = null) {
+        $record = (object)(array)$record;
+
+        if (!isset($record->cypherlabtype)) {
+            $record->cypherlabtype = 'upload';
+        }
+        if (!isset($record->grade)) {
+            $record->grade = 100;
+        }
+        if (!isset($record->timedue)) {
+            $record->timedue = 0;
+        }
+
+        return parent::create_instance($record, (array)$options);
     }
-
-    public function render_quick_test_page() {
-        return parent::render_from_template('tool_devcourse/quick_test_page', array());
-    }
-
 }

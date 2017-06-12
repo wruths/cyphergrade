@@ -1,4 +1,5 @@
 <?php
+
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -15,16 +16,18 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
- *
- * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @package cypherlab_upload
+ * @copyright 2011 onwards Aparup Banerjee (nebgor)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
-
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+/**
+ * A dummy class for upload conversions.
+ * The upload subplugin doesn't really need anything converted.
+ * See the moodle1_cypherlab_subplugin_handler class.
+ */
+class moodle1_mod_cypherlab_upload_subplugin_handler extends moodle1_cypherlab_subplugin_handler {
+    /**
+     * Override the append_subplugin_data($data) method here for plugin specific processing.
+     */
+}

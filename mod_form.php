@@ -15,16 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * This file contains the forms to create and edit an instance of this module
  *
  * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
+ * @copyright 2007 Petr Skoda
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die('Direct access to this script is forbidden.');
 
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+require_once($CFG->dirroot.'/course/moodleform_mod.php');
+
+/**
+ * Disabled cypherlab settings form.
+ *
+ * @package   mod_cypherlab
+ * @copyright 2013 Damyon Wiese
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+class mod_cypherlab_mod_form extends moodleform_mod {
+
+    /**
+     * Called to define this moodle form
+     *
+     * @return void
+     */
+    public function definition() {
+        print_error('cypherlabdisabled', 'cypherlab');
+    }
+
+
+}

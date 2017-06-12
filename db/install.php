@@ -15,16 +15,29 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * Disable the cypherlab module for new installs
  *
- * @package   mod_cypherlab
- * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
- * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package mod_cypherlab
+ * @copyright 2012 NetSpot {@link http://www.netspot.com.au}
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2016120500;       // The current module version (Date: YYYYMMDDXX)
-$plugin->requires  = 2016112900;    // Requires this Moodle version
-$plugin->component = 'mod_cypherlab'; // Full name of the plugin (used for diagnostics)
-$plugin->cron      = 60;
+
+/**
+ * Code run after the mod_cypherlab module database tables have been created.
+ * Disables this plugin for new installs
+ * @return bool
+ */
+function xmldb_cypherlab_install() {
+    global $DB;
+
+    // do the install
+    $DB->set_field('modules', 'visible', '0', array('name'=>'cypherlab')); // Hide main module
+
+    // Should not need to modify course modinfo because this is a new install
+
+    return true;
+}
+
+

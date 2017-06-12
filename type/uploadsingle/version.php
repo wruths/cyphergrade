@@ -15,12 +15,15 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'tool_devcourse', language 'en'.
+ * Version details
  *
- * @package    tool_devcourse
- * @copyright  2016 Adrian Greeve <adriangreeve.com>
+ * @package    cypherlab_uploadsingle
+ * @copyright  1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['maintitle'] = 'Main page title';
-$string['pluginname'] = 'Cypherpath Lab Grader';
+defined('MOODLE_INTERNAL') || die();
+
+$plugin->version   = 2016120500;        // The current plugin version (Date: YYYYMMDDXX)
+$plugin->requires  = 2016112900;        // Requires this Moodle version
+$plugin->component = 'cypherlab_uploadsingle'; // Full name of the plugin (used for diagnostics)
